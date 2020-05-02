@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gocache-client
+  labels:
+    app: gocache-client
+spec:
+  selector:
+    matchLabels:
+      app: gocache-client
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: gocache-client
+    spec:
+      containers:
+        - name: master
+          image: gocache-client
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 8080
